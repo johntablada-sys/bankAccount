@@ -1,4 +1,14 @@
+package bankaccount;
+
+/**
+ * Runs example transactions against a savings account.
+ */
 public class Main {
+  /**
+   * Runs the bank account example and its transaction test cases.
+   *
+   * @param args command-line arguments
+   */
   public static void main(String[] args) {
     BankAccount acc1 = new SavingsAccount("Test0");
     System.out.println("Owner name: " + ((SavingsAccount) acc1).getOwnerName());
