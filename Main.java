@@ -1,0 +1,80 @@
+public class Main {
+  public static void main(String[] args) {
+    BankAccount acc1 = new SavingsAccount("Test0");
+    System.out.println("Owner name: " + ((SavingsAccount) acc1).getOwnerName());
+
+    System.out.println("\n--- Deposit test ---");
+    double depositAmount = 1000.125;
+    System.out.printf("Amount to be deposited: %.2f%n", depositAmount);
+    double currentBalance = acc1.deposit(depositAmount);
+    System.out.printf("Amount deposited: %.2f%n", depositAmount);
+    System.out.printf("Current balance: %.2f%n", currentBalance);
+
+    System.out.println("\n--- Withdrawal test ---");
+    double withdrawalAmount = 500;
+    System.out.printf("Amount to be withdrawn: %.2f%n", withdrawalAmount);
+    currentBalance = acc1.withdraw(withdrawalAmount);
+    System.out.printf("Amount withdrawn: %.2f%n", withdrawalAmount);
+    System.out.printf("Current balance: %.2f%n", currentBalance);
+
+    System.out.println("\n--- Excessive withdrawal test ---");
+    double excessiveWithdrawalAmount = 1500;
+    System.out.printf("Amount to be withdrawn: %.2f%n", excessiveWithdrawalAmount);
+    try {
+      acc1.withdraw(excessiveWithdrawalAmount);
+    } catch (IllegalArgumentException exception) {
+      System.out.println("Withdrawal declined: " + exception.getMessage());
+      System.out.printf("Current balance: %.2f%n", acc1.getBalance());
+    }
+
+    System.out.println("\n--- Negative deposit test ---");
+    double negativeDepositAmount = -100;
+    System.out.printf("Amount to be deposited: %.2f%n", negativeDepositAmount);
+    try {
+      acc1.deposit(negativeDepositAmount);
+    } catch (IllegalArgumentException exception) {
+      System.out.println("Negative deposit rejected: " + exception.getMessage());
+    }
+
+    System.out.println("\n--- Negative withdrawal test ---");
+    double negativeWithdrawalAmount = -100;
+    System.out.printf("Amount to be withdrawn: %.2f%n", negativeWithdrawalAmount);
+    try {
+      acc1.withdraw(negativeWithdrawalAmount);
+    } catch (IllegalArgumentException exception) {
+      System.out.println("Negative withdrawal rejected: " + exception.getMessage());
+    }
+
+    System.out.println("\n--- Freeze account test ---");
+    acc1.freezeAccount();
+    System.out.println("Account frozen: " + acc1.isFrozen());
+
+    double frozenDepositAmount = 11500;
+    System.out.printf("Amount to be deposited: %.2f%n", frozenDepositAmount);
+    try {
+      acc1.deposit(frozenDepositAmount);
+    } catch (IllegalStateException exception) {
+      System.out.println("Deposit declined: " + exception.getMessage());
+    }
+
+    System.out.println("\n--- Withdrawal while account is frozen test ---");
+    double frozenWithdrawalAmount = 100;
+    System.out.printf("Amount to be withdrawn: %.2f%n", frozenWithdrawalAmount);
+    try {
+      acc1.withdraw(frozenWithdrawalAmount);
+    } catch (IllegalStateException exception) {
+      System.out.println("Withdrawal declined: " + exception.getMessage());
+      System.out.printf("Current balance: %.2f%n", acc1.getBalance());
+    }
+
+    System.out.println("\n--- Unfreeze account test ---");
+    acc1.unFreezeAccount();
+    System.out.println("Account frozen: " + acc1.isFrozen());
+
+    double unFrozenWithdrawalAmount = 100;
+    System.out.printf("Amount to be withdrawn: %.2f%n", unFrozenWithdrawalAmount);
+    currentBalance = acc1.withdraw(unFrozenWithdrawalAmount);
+    System.out.printf("Amount withdrawn: %.2f%n", unFrozenWithdrawalAmount);
+    System.out.printf("Current balance: %.2f%n", currentBalance);
+  }
+}
