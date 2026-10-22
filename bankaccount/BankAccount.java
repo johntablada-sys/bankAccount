@@ -72,7 +72,7 @@ public class BankAccount {
   /**
    * Unfreezes the account, allowing deposits and withdrawals.
    */
-  public void unFreezeAccount() {
+  public void unfreezeAccount() {
     isFrozen = false;
   }
 

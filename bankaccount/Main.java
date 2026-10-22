@@ -78,7 +78,7 @@ public class Main {
     }
 
     System.out.println("\n--- Unfreeze account test ---");
-    acc1.unFreezeAccount();
+    acc1.unfreezeAccount();
     System.out.println("Account frozen: " + acc1.isFrozen());
 
     double unFrozenWithdrawalAmount = 100;
